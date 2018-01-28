@@ -126,4 +126,4 @@ class InvalidOperationException : public Exception   //操作错误异常
 };
 };
 
-#endif //EXCEPTION_Hf
+#endif //EXCEPTION_H

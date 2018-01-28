@@ -2,10 +2,10 @@
 #define DYNAMIC_LIST_H
 #include "Exception.h"
 #include "SeqList.h"
-namespace
+namespace YJDLib
 {
 template <typename T>
-class DynamicList : public SeqList
+class DynamicList : public SeqList<T>
 {
   protected:
     int mCapacity; //顺序存储空间
@@ -23,7 +23,7 @@ class DynamicList : public SeqList
             THROW_EXCEPTION(NoEnoughMemoryException, "No Memory to create dynamiclist object...");
         }
     }
-    int capacity() const
+    int capacity() 
     {
         return mCapacity;
     }
@@ -32,15 +32,15 @@ class DynamicList : public SeqList
     {
         if (mCapacity != capacity)
         {
-            T* array = new T[capacity];
-            if(array)
+            T *array = new T[capacity];
+            if (array)
             {
-                int length = (this->mLength < capacity ? this->mLength:capacity);
-                for(int i = 0; i < length; i++ )
+                int length = (this->mLength < capacity ? this->mLength : capacity);
+                for (int i = 0; i < length; i++)
                 {
                     array[i] = this->mArray[i];
                 }
-                T* temp = this->mArray;
+                T *temp = this->mArray;
                 this->mArray = array;
                 this->mLength = length;
                 this->mCapacity = capacity;
@@ -59,4 +59,4 @@ class DynamicList : public SeqList
 };
 };
 
-#endif
+#endif  //DYNAMIC_LIST_H

@@ -58,14 +58,27 @@ class SeqList : public List<T>
         }
         return ret;
     }
+    /*查找操作，成功返回元素的下标，失败返回-1*/
+    int find(const T& e) const
+    {
+        int ret = -1;
+        for(int i = 0; i < mLength; i++)
+        {
+            if(mArray[i] == e)
+            {
+                ret = i;
+                break;
+            }
+        }
+        return ret;
+    }
     int length() const
     {
         return mLength;
     }
-    bool clear()
+    void clear()
     {
         mLength = 0;
-        return true;
     }
     //顺序存储线性表的数组访问方式
     T& operator [](const int i)

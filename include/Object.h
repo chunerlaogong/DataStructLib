@@ -22,6 +22,8 @@ class Object   //Object类为纯虚父类，所有继承该类的子类都能进
     void *operator new(size_t size) throw();    //函数末尾加上throw(),表明该函数不会抛出任何异常
     void operator delete(void *p);
     void *operator new[](size_t size) throw();
+    bool operator == (const Object& obj);
+    bool operator != (const Object& obj);
     void operator delete[](void *p);
     virtual ~Object() = 0;
 };
