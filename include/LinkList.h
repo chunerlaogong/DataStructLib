@@ -32,16 +32,14 @@ template <typename T>
 class LinkList : public List<T>
 {
   protected:
-    //定义Node节点(C++中的struct和C中的struct完全不一样，可以用来定义一个类，\
-    C++中的struct和class的区别在于struct中默认的成员是公有的，class的默认成员是私有的)
+    //定义Node节点(C++中的struct和C中的struct完全不一样，可以用来定义一个类，C++中的struct和class的区别在于struct中默认的成员是公有的，class的默认成员是私有的)
     struct Node : public Object
     {
         T value;
         Node *next;
     };
     //Node  mHeader;
-    //这样定义为了防止定义头结点的时候调用构造函数出错,public Object必须要, \
-    不然内存布局不一样,会报段错误
+    //这样定义为了防止定义头结点的时候调用构造函数出错,public Object必须要, 不然内存布局不一样,会报段错误
     mutable struct: public Object
     { 
         char reserved[sizeof(T)];
@@ -109,6 +107,10 @@ class LinkList : public List<T>
         {
             Node *current = position(i);
             Node *toDel = current->next;
+            if(mCurrent == toDel)
+            {
+                mCurrent = toDel->next;
+            }
             current->next = toDel->next;
             mLength--;
            // delete toDel;
@@ -168,6 +170,7 @@ class LinkList : public List<T>
         {
             e = position(i)->next->value;
         }
+        return ret;
     }
     int length() const
     {
@@ -178,7 +181,7 @@ class LinkList : public List<T>
         while (this->mHeader.next)
         {
             Node *toDel = this->mHeader.next;
-            this->mHeader.next = toDel->next;
+            this->mHeader.next = toDel->next;   
             this->mLength--;
            // delete toDel;
            destroy(toDel);
